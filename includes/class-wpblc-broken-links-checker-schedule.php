@@ -79,7 +79,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Schedule' ) ) :
 			wp_clear_scheduled_hook( 'wpblc_broken_links_checker_scheduled_event' );
 
 			// Schedule the event.
-			if ( ! wp_next_scheduled( 'wpblc_broken_links_checker_scheduled_event' ) ) {
+			if ( ! wp_next_scheduled( 'wpblc_broken_links_checker_scheduled_event' ) && 'never' !== $frequency ) {
 				wp_schedule_event( time(), $frequency, 'wpblc_broken_links_checker_scheduled_event' );
 			}
 		}

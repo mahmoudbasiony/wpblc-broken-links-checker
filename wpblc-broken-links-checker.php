@@ -7,7 +7,7 @@
  * Author: Ilias Chelidonis
  * Author URI:
  * Requires at least: 5.4
- * Tested up to: 6.5.3
+ * Tested up to: 6.5.4
  *
  * Text Domain: wpblc-broken-links-checker
  * Domain Path: /languages/
@@ -145,8 +145,21 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker' ) ) :
 		 * @return void
 		 */
 		public static function activate() {
+			/*
+			 * Set default settings.
+			 */
+			$settings['scan_frequency']      = 'weekly';
+			$settings['email_notifications'] = 'off';
+			$settings['email_addresses']     = '';
+			$settings['number_of_links']     = 'all';
+			$settings['scope_of_links']      = array( 'all' );
+			$settings['exclusion_urls']      = '';
+
+			add_option( 'wpblc_broken_links_checker_settings', $settings );
+
+			// Schedule the event.
 			$settings  = get_option( 'wpblc_broken_links_checker_settings', array() );
-			$frequency = isset( $settings['scan_frequency'] ) ? $settings['scan_frequency'] : 'daily';
+			$frequency = isset( $settings['scan_frequency'] ) ? $settings['scan_frequency'] : 'weekly';
 
 			if ( ! wp_next_scheduled( 'wpblc_broken_links_checker_scheduled_event' ) ) {
 				wp_schedule_event( time(), $frequency, 'wpblc_broken_links_checker_scheduled_event' );

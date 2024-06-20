@@ -202,7 +202,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Settings' ) ) :
 		 * @return void
 		 */
 		public function settings_scan_frequency() {
-			$scan_frequency = isset( $this->settings['scan_frequency'] ) ? $this->settings['scan_frequency'] : 'daily';
+			$scan_frequency = isset( $this->settings['scan_frequency'] ) ? $this->settings['scan_frequency'] : 'weekly';
 
 			include_once WPBLC_BROKEN_LINKS_CHECKER_TEMPLATES_PATH . 'admin/views/sections/fields/scan-frequency.php';
 		}

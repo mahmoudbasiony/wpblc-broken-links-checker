@@ -397,7 +397,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Links_List_Table' ) ) :
 						<select name="wpblc_type_filter">
 							<option value="" <?php selected( $selected_type, '' ); ?>"><?php esc_html_e( 'All Types', 'wpblc-broken-links-checker' ); ?></option>
 							<option value="internal" <?php selected( $selected_type, 'internal' ); ?>"><?php esc_html_e( 'Internal', 'wpblc-broken-links-checker' ); ?></option>
-							<option value="external" <?php selected( $selected_location, 'external' ); ?>"><?php esc_html_e( 'External', 'wpblc-broken-links-checker' ); ?></option>
+							<option value="external" <?php selected( $selected_type, 'external' ); ?>"><?php esc_html_e( 'External', 'wpblc-broken-links-checker' ); ?></option>
 						</select>
 
 						<select name="wpblc_status_filter">
