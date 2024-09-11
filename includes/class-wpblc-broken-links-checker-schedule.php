@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Schedule class.
  *
  * @package WPBLC_Broken_Links_Checker
- * @author  Ilias Chelidonis
+ * @author  SilkWP
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

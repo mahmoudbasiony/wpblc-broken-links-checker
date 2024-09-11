@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Admin_Export class.
  *
  * @package WPBLC_Broken_Links_Checker/Admin
- * @author  Ilias Chelidonis
+ * @author  SilkWP
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -45,7 +45,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Export' ) ) :
 				// Check if our form has been submitted.
 				if ( isset( $_POST['action'] ) && 'wpblc_export_csv' === $_POST['action'] ) {
 					// Verify the nonce.
-					if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'wpblc_export_csv_nonce' ) ) {
+					if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['nonce'] ), 'wpblc_export_csv_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 						wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpblc-broken-links-checker' ) );
 					}
 
@@ -84,7 +84,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Export' ) ) :
 					}
 
 					// Close the output stream.
-					fclose( $fh );
+					fclose( $fh ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 					exit;
 				}
 			}

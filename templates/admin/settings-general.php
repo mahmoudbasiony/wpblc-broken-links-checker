@@ -5,7 +5,7 @@
  * @var array $settings - The plugin settings array
  *
  * @package WPBLC_Broken_Links_Checker/Templates/Admin
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

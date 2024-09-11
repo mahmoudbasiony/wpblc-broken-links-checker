@@ -1,4 +1,4 @@
-# WP Broken Links Checker
+# Broken Links Checker
 
 .
 

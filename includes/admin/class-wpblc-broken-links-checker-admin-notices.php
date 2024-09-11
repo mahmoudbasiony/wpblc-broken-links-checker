@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Admin_Notices class.
  *
  * @package WPBLC_Broken_Links_Checker/Admin
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -101,7 +101,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
 			if ( empty( $show_phpver_notice ) ) {
 				if ( version_compare( phpversion(), WPBLC_BROKEN_LINKS_CHECKER_MIN_PHP_VER, '<' ) ) {
 					/* translators: 1) int version 2) int version */
-					$message = esc_html__( 'WP Broken Links Checker - The minimum PHP version required for this plugin is %1$s. You are running %2$s.', 'wpblc-broken-links-checker' );
+					$message = esc_html__( 'Broken Links Checker - The minimum PHP version required for this plugin is %1$s. You are running %2$s.', 'wpblc-broken-links-checker' );
 					$this->add_admin_notice( 'phpver', 'error', sprintf( $message, WPBLC_BROKEN_LINKS_CHECKER_MIN_PHP_VER, phpversion() ), true );
 				}
 			}
@@ -111,7 +111,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
 
 				if ( version_compare( $wp_version, WPBLC_BROKEN_LINKS_CHECKER_MIN_WP_VER, '<' ) ) {
 					/* translators: 1) int version 2) int version */
-					$message = esc_html__( 'WP Broken Links Checker - The minimum WordPress version required for this plugin is %1$s. You are running %2$s.', 'wpblc-broken-links-checker' );
+					$message = esc_html__( 'Broken Links Checker - The minimum WordPress version required for this plugin is %1$s. You are running %2$s.', 'wpblc-broken-links-checker' );
 					$this->add_admin_notice( 'wpver', 'notice notice-warning', sprintf( $message, WPBLC_BROKEN_LINKS_CHECKER_MIN_WP_VER, WC_VERSION ), true );
 				}
 			}
@@ -126,11 +126,11 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
 		 */
 		public function hide_notices() {
 			if ( isset( $_GET['wpblc-broken-links-checker-hide-notice'] ) && isset( $_GET['_wpblc_broken_links_checker_notice_nonce'] ) ) {
-				if ( ! wp_verify_nonce( $_GET['_wpblc_broken_links_checker_notice_nonce'], 'wpblc_broken_links_checker_hide_notices_nonce' ) ) {
+				if ( ! wp_verify_nonce( wp_unslash( $_GET['_wpblc_broken_links_checker_notice_nonce'] ), 'wpblc_broken_links_checker_hide_notices_nonce' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 					wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpblc-broken-links-checker' ) );
 				}
 
-				$notice = sanitize_text_field( $_GET['wpblc-broken-links-checker-hide-notice'] );
+				$notice = sanitize_text_field( wp_unslash( $_GET['wpblc-broken-links-checker-hide-notice'] ) );
 
 				switch ( $notice ) {
 					case 'phpver':

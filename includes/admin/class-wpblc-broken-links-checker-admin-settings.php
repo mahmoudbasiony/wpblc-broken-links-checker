@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Admin_Settings class.
  *
  * @package WPBLC_Broken_Links_Checker/Admin
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -55,8 +55,8 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Settings' ) ) :
 		 */
 		public function menu() {
 			$hook = add_menu_page(
-				esc_html__( 'WP Broken Links Checker', 'wpblc-broken-links-checker' ),
-				esc_html__( 'WP Broken Links Checker', 'wpblc-broken-links-checker' ),
+				esc_html__( 'Broken Links Checker', 'wpblc-broken-links-checker' ),
+				esc_html__( 'Broken Links Checker', 'wpblc-broken-links-checker' ),
 				'manage_options',
 				'wpblc-broken-links-checker',
 				array( $this, 'menu_page' ),

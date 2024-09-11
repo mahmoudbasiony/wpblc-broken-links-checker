@@ -3,7 +3,7 @@
  * Some helper core functions.
  *
  * @package WPBLC_Broken_Links_Checker
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

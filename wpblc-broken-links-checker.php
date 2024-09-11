@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: WP Broken Links Checker
+ * Plugin Name: Broken Links Checker
  * Plugin URI:
  * Description: Schedule automated scans to detect broken links on your WordPress site, view results in an intuitive table, and receive email notifications for swift resolution.
  * Version: 1.0.0
- * Author: Ilias Chelidonis
+ * Author: SilkWP
  * Author URI:
  * Requires at least: 5.4
- * Tested up to: 6.5.4
+ * Tested up to: 6.6.2
  *
  * Text Domain: wpblc-broken-links-checker
  * Domain Path: /languages/
@@ -16,7 +16,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package WPBLC_Broken_Links_Checker
- * @author Ilias Chelidonis
+ * @author SilkWP
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*
  * Globals constants.
  */
-define( 'WPBLC_BROKEN_LINKS_CHECKER_PLUGIN_NAME', 'WP Broken Links Checker' );
+define( 'WPBLC_BROKEN_LINKS_CHECKER_PLUGIN_NAME', 'Broken Links Checker' );
 define( 'WPBLC_BROKEN_LINKS_CHECKER_PLUGIN_VERSION', '1.0.0' );
 define( 'WPBLC_BROKEN_LINKS_CHECKER_MIN_PHP_VER', '7.3' );
 define( 'WPBLC_BROKEN_LINKS_CHECKER_MIN_WP_VER', '5.4' );

@@ -1,6 +1,6 @@
 <?php
 /**
- * Uninstall WP Broken Links Checker plugin.
+ * Uninstall Broken Links Checker plugin.
  *
  * @package WPBLC_Broken_Links_Checker
  * @author  Reviewshake

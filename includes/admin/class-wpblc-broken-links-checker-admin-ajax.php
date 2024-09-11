@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Admin_Ajax class.
  *
  * @package WPBLC_Broken_Links_Checker/Admin
- * @author  Ilias Chelidonis
+ * @author  SilkWP
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -42,7 +42,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Ajax' ) ) :
 		 */
 		public function manual_scan() {
 			// Check for nonce security.
-			if ( ! wp_verify_nonce( $_POST['nonce'], 'wpblc_broken_links_checker' ) ) {
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpblc_broken_links_checker' ) ) {
 				wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpblc-broken-links-checker' ) );
 			}
 
@@ -87,12 +87,12 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Ajax' ) ) :
 		 */
 		public function mark_as_fixed() {
 			// Check for nonce security.
-			if ( ! wp_verify_nonce( $_POST['nonce'], 'wpblc_broken_links_checker' ) ) {
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpblc_broken_links_checker' ) ) {
 				wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpblc-broken-links-checker' ) );
 			}
 
 			if ( isset( $_POST ) && isset( $_POST['action'] ) && 'wpblc_broken_links_mark_as_fixed' === $_POST['action'] ) {
-				$link    = isset( $_POST['link'] ) ? sanitize_text_field( $_POST['link'] ) : '';
+				$link    = isset( $_POST['link'] ) ? sanitize_text_field( wp_unslash( $_POST['link'] ) ) : '';
 				$post_id = isset( $_POST['postId'] ) ? intval( $_POST['postId'] ) : 0;
 
 				$links = get_option( 'wpblc_broken_links_checker_links', array() );
@@ -122,12 +122,12 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Ajax' ) ) :
 		 */
 		public function mark_as_broken() {
 			// Check for nonce security.
-			if ( ! wp_verify_nonce( $_POST['nonce'], 'wpblc_broken_links_checker' ) ) {
+			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'wpblc_broken_links_checker' ) ) {
 				wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpblc-broken-links-checker' ) );
 			}
 
 			if ( isset( $_POST ) && isset( $_POST['action'] ) && 'wpblc_broken_links_mark_as_broken' === $_POST['action'] ) {
-				$link    = isset( $_POST['link'] ) ? sanitize_text_field( $_POST['link'] ) : '';
+				$link    = isset( $_POST['link'] ) ? sanitize_text_field( wp_unslash( $_POST['link'] ) ) : '';
 				$post_id = isset( $_POST['postId'] ) ? intval( $_POST['postId'] ) : 0;
 
 				$links = get_option( 'wpblc_broken_links_checker_links', array() );

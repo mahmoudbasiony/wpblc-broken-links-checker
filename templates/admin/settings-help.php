@@ -3,7 +3,7 @@
  * Settings - Help.
  *
  * @package WPBLC_Broken_Links_Checker/Templates/Admin
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

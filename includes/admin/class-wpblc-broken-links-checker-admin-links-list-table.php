@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Admin_Links_List_Table class.
  *
  * @package WPBLC_Broken_Links_Checker/Admin
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,6 +51,11 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Links_List_Table' ) ) :
 		 * @return void
 		 */
 		public function prepare_items() {
+			// Verify the nonce.
+			if ( isset( $_REQUEST['wpblc_type_filter'] ) || isset( $_REQUEST['wpblc_status_filter'] ) || isset( $_REQUEST['wpblc_location_filter'] ) ) {
+				if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'wpblc_filter_action' ) ) {
+					wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpblc-broken-links-checker' ) );}
+			}
 
 			$columns  = $this->get_columns();
 			$hidden   = array();
@@ -65,15 +70,15 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Links_List_Table' ) ) :
 			);
 
 			if ( isset( $_REQUEST['wpblc_type_filter'] ) && '' !== $_REQUEST['wpblc_type_filter'] ) {
-				$filter['type'] = sanitize_text_field( $_REQUEST['wpblc_type_filter'] );
+				$filter['type'] = sanitize_text_field( wp_unslash( $_REQUEST['wpblc_type_filter'] ) );
 			}
 
 			if ( isset( $_REQUEST['wpblc_status_filter'] ) && '' !== $_REQUEST['wpblc_status_filter'] ) {
-				$filter['status'] = sanitize_text_field( $_REQUEST['wpblc_status_filter'] );
+				$filter['status'] = sanitize_text_field( wp_unslash( $_REQUEST['wpblc_status_filter'] ) );
 			}
 
 			if ( isset( $_REQUEST['wpblc_location_filter'] ) && '' !== $_REQUEST['wpblc_location_filter'] ) {
-				$filter['location'] = sanitize_text_field( $_REQUEST['wpblc_location_filter'] );
+				$filter['location'] = sanitize_text_field( wp_unslash( $_REQUEST['wpblc_location_filter'] ) );
 			}
 
 			$per_page     = get_user_option( 'links_per_page' );
@@ -387,11 +392,17 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Links_List_Table' ) ) :
 		 * @return void
 		 */
 		public function extra_tablenav( $which ) {
+			// Verify the nonce.
+			if ( isset( $_REQUEST['wpblc_type_filter'] ) || isset( $_REQUEST['wpblc_status_filter'] ) || isset( $_REQUEST['wpblc_location_filter'] ) ) {
+				if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'wpblc_filter_action' ) ) {
+					wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpblc-broken-links-checker' ) );}
+			}
+
 			if ( 'top' === $which ) {
 				// The code that goes before the table is here.
-				$selected_type     = isset( $_REQUEST['wpblc_type_filter'] ) ? sanitize_text_field( $_REQUEST['wpblc_type_filter'] ) : '';
-				$selected_status   = isset( $_REQUEST['wpblc_status_filter'] ) ? sanitize_text_field( $_REQUEST['wpblc_status_filter'] ) : '';
-				$selected_location = isset( $_REQUEST['wpblc_location_filter'] ) ? sanitize_text_field( $_REQUEST['wpblc_location_filter'] ) : '';
+				$selected_type     = isset( $_REQUEST['wpblc_type_filter'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wpblc_type_filter'] ) ) : '';
+				$selected_status   = isset( $_REQUEST['wpblc_status_filter'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wpblc_status_filter'] ) ) : '';
+				$selected_location = isset( $_REQUEST['wpblc_location_filter'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['wpblc_location_filter'] ) ) : '';
 				?>
 					<div class="alignleft actions">
 						<select name="wpblc_type_filter">
@@ -416,6 +427,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Links_List_Table' ) ) :
 						<input type="hidden" name="page" value="wpblc-broken-links-checker">
 						<input type="hidden" name="tab" value="scan">
 
+						<?php wp_nonce_field( 'wpblc_filter_action', '_wpnonce' ); ?>
 						<?php submit_button( 'Filter', 'button', 'filter_action', false ); ?>
 					</div>
 				<?php

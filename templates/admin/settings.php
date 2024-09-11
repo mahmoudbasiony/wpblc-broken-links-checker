@@ -3,7 +3,7 @@
  * Settings.
  *
  * @package WPBLC_Broken_Links_Checker/Templates/Admin
- * @author  Ilias Chelidonis.
+ * @author  SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $plugin_tabs = array( 'general', 'scan', 'help' );
 
 // Current tab.
-$plugin_tab = isset( $_GET['tab'] ) && in_array( $_GET['tab'], $plugin_tabs, true ) ? sanitize_text_field( $_GET['tab'] ) : 'general';
+$plugin_tab = isset( $_GET['tab'] ) && in_array( $_GET['tab'], $plugin_tabs, true ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 ?>
 

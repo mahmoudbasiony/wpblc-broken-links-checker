@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Utilities class.
  *
  * @package WPBLC_Broken_Links_Checker
- * @author Ilias Chelidonis
+ * @author SilkWP
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -582,7 +582,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Utilities' ) ) {
 			$id = false;
 
 			// Get the host.
-			$parse = parse_url( $link );
+			$parse = wp_parse_url( $link );
 			if ( isset( $parse['host'] ) && isset( $parse['path'] ) ) {
 				$host = $parse['host'];
 				$path = $parse['path'];
@@ -633,8 +633,8 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Utilities' ) ) {
 		 * @return string
 		 */
 		public static function get_link_source( $link ) {
-			$link_host = parse_url( $link, PHP_URL_HOST );
-			$site_host = parse_url( get_site_url(), PHP_URL_HOST );
+			$link_host = wp_parse_url( $link, PHP_URL_HOST );
+			$site_host = wp_parse_url( get_site_url(), PHP_URL_HOST );
 
 			return $link_host === $site_host ? 'internal' : 'external';
 		}

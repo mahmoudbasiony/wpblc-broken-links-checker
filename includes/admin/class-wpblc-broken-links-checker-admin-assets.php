@@ -3,7 +3,7 @@
  * The WPBLC_Broken_Links_Checker_Admin_Assets class.
  *
  * @package WPBLC_Broken_Links_Checker/Admin
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -40,7 +40,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Assets' ) ) :
 		 * @return void
 		 */
 		public function scripts() {
-			$current_page = isset( $_GET ) && isset( $_GET['page'] ) ? sanitize_text_field( $_GET['page'] ) : '';
+			$current_page = isset( $_GET ) && isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( empty( $current_page ) || 'wpblc-broken-links-checker' !== $current_page ) {
 				return;
 			}

@@ -3,7 +3,7 @@
  * Settings - Admin - Views - Sections - Fields.
  *
  * @package WPBLC_Broken_Links_Checker/Templates/Admin/Views/Sections/Fields
- * @author Ilias Chelidonis.
+ * @author SilkWP.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
